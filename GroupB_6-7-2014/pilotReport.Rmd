@@ -48,6 +48,7 @@ knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
 [PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]
 
 ```{r}
+
 # load packages
 library(tidyverse) # for data munging
 library(knitr) # for kable table formating
@@ -87,19 +88,48 @@ STG = filter(df, STN_NAME == "STG")
 ```
 
 ## Descriptive statistics
-
+We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station,F(3,194)=24.10,p<.001,ηp2=.27.This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. 
 ```{r}
 fit <- aov(DISTANCE ~ DIRECTION*STN_NAME, data=df)
 summary(fit)
 etaSquared(fit, type = 2, anova = FALSE)
 ```
 
+Now, check the values obtained above: "no main effect of orientation, F < 1"
+```{r}
+orientation_f_value <- .664
+reportObject <- reproCheck(reportedValue = '<1', obtainedValue = orientation_f_value, valueType = 'F', eyeballCheck = TRUE)
+```
+Next, check "main effect of station,F(3,194)=24.10,p<.001,ηp2=.27."
+```{r}
+station_f_value <- 23.349
+reportObject <- reproCheck(reportedValue = '24.10', obtainedValue = station_f_value, valueType = 'F')
+
+station_p_value <- 6.01e-13
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = station_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+station_pes_value <- 0.265284110
+reportObject <- reproCheck(reportedValue = '0.27', obtainedValue = station_pes_value, valueType = 'pes')
+```
+
+
 ## Inferential statistics
+"We decomposed this interaction by comparing the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants".
+
 East/West comparison for St. George's:
 ```{r}
 fit_STG <- aov(DISTANCE ~ DIRECTION, data=STG)
 summary(fit_STG)
 etaSquared(fit_STG)
+```
+
+Check East/West comparison for St. George's (St. George, p < .001, ηp2 = .28). 
+```{r}
+STG_p_value <- 7.23e-05
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = STG_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+STG_pes_value <- 0.2772092
+reportObject <- reproCheck(reportedValue = '0.28', obtainedValue = STG_pes_value, valueType = 'pes')
 ```
 
 East/West comparison for Spadina:
@@ -108,12 +138,32 @@ fit_SPAD <-aov(DISTANCE ~ DIRECTION, data=SPAD)
 summary(fit_SPAD)
 etaSquared(fit_SPAD)
 ```
+
+Check East/West comparison for Spadina (Spadina, p = .001, ηp2 = .20). 
+```{r}
+SPAD_p_value <- 0.00113
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = SPAD_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+SPAD_pes_value <- 0.1962763
+reportObject <- reproCheck(reportedValue = '0.20', obtainedValue = SPAD_pes_value, valueType = 'pes')
+```
+
 East/West comparison for Bloor-Yonge:
 ```{r}
 fit_BY <-aov(DISTANCE ~ DIRECTION, data=BY)
 summary(fit_BY)
 etaSquared(fit_BY)
 ```
+
+Check East/West comparison for Bloor-Yonge (Bloor-Yonge, p = .053, ηp2 = .08). 
+```{r}
+BY_p_value <- 0.0528 
+reportObject <- reproCheck(reportedValue = '>0.05', obtainedValue = BY_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+BY_pes_value <- 0.0774451
+reportObject <- reproCheck(reportedValue = '0.08', obtainedValue = BY_pes_value, valueType = 'pes')
+```
+
 East/West comparison for Sherbourne:
 ```{r}
 fit_SHER <- aov(DISTANCE ~ DIRECTION, data=SHER)
@@ -121,9 +171,17 @@ summary(fit_SHER)
 etaSquared(fit_SHER)
 ```
 
+Check East/West comparison for Sherbourne  (Sherbourne, p < .001, ηp2 = .24). 
+```{r}
+SHER_p_value <- 0.000305
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = SHER_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+SHER_pes_value <- 0.2356667
+reportObject <- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_value, valueType = 'pes')
+```
 # Step 5: Conclusion
 
-Overall, the my results are extremely similar to the paper. The values for the descriptive statistics are slightly off but I suspect it is due a different type of ANOVA. The post-hoc comparisons are the same. 
+This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error. 
 
 
 [PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]

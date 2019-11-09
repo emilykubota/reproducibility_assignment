@@ -1564,6 +1564,7 @@ STG = filter(df, STN_NAME == &quot;STG&quot;)</code></pre>
 </div>
 <div id="descriptive-statistics" class="section level2">
 <h2>Descriptive statistics</h2>
+<p>We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F &lt; 1, and a main effect of station,F(3,194)=24.10,p&lt;.001,ηp2=.27.This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p &lt; .001, ηp2 = .20.</p>
 <pre class="r"><code>fit &lt;- aov(DISTANCE ~ DIRECTION*STN_NAME, data=df)
 summary(fit)</code></pre>
 <pre><code>##                     Df Sum Sq Mean Sq F value   Pr(&gt;F)    
@@ -1578,9 +1579,24 @@ summary(fit)</code></pre>
 ## DIRECTION          0.001195964 0.001929304
 ## STN_NAME           0.223393543 0.265284110
 ## DIRECTION:STN_NAME 0.155789423 0.201151614</code></pre>
+<p>Now, check the values obtained above: “no main effect of orientation, F &lt; 1”</p>
+<pre class="r"><code>orientation_f_value &lt;- .664
+reportObject &lt;- reproCheck(reportedValue = '&lt;1', obtainedValue = orientation_f_value, valueType = 'F', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for F. Eyeball comparison only.&quot;</code></pre>
+<p>Next, check “main effect of station,F(3,194)=24.10,p&lt;.001,ηp2=.27.”</p>
+<pre class="r"><code>station_f_value &lt;- 23.349
+reportObject &lt;- reproCheck(reportedValue = '24.10', obtainedValue = station_f_value, valueType = 'F')</code></pre>
+<pre><code>## [1] &quot;MINOR_ERROR for F. The reported value (24.1) and the obtained value (23.35) differed by 3.11%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
+<pre class="r"><code>station_p_value &lt;- 6.01e-13
+reportObject &lt;- reproCheck(reportedValue = '&lt;0.001', obtainedValue = station_p_value, valueType = 'p', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for p. Eyeball comparison only.&quot;</code></pre>
+<pre class="r"><code>station_pes_value &lt;- 0.265284110
+reportObject &lt;- reproCheck(reportedValue = '0.27', obtainedValue = station_pes_value, valueType = 'pes')</code></pre>
+<pre><code>## [1] &quot;MATCH for pes. The reported value (0.27) and the obtained value (0.27) differed by 0%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
 </div>
 <div id="inferential-statistics" class="section level2">
 <h2>Inferential statistics</h2>
+<p>“We decomposed this interaction by comparing the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants”.</p>
 <p>East/West comparison for St. George’s:</p>
 <pre class="r"><code>fit_STG &lt;- aov(DISTANCE ~ DIRECTION, data=STG)
 summary(fit_STG)</code></pre>
@@ -1592,6 +1608,13 @@ summary(fit_STG)</code></pre>
 <pre class="r"><code>etaSquared(fit_STG)</code></pre>
 <pre><code>##              eta.sq eta.sq.part
 ## DIRECTION 0.2772092   0.2772092</code></pre>
+<p>Check East/West comparison for St. George’s (St. George, p &lt; .001, ηp2 = .28).</p>
+<pre class="r"><code>STG_p_value &lt;- 7.23e-05
+reportObject &lt;- reproCheck(reportedValue = '&lt;0.001', obtainedValue = STG_p_value, valueType = 'p', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for p. Eyeball comparison only.&quot;</code></pre>
+<pre class="r"><code>STG_pes_value &lt;- 0.2772092
+reportObject &lt;- reproCheck(reportedValue = '0.28', obtainedValue = STG_pes_value, valueType = 'pes')</code></pre>
+<pre><code>## [1] &quot;MATCH for pes. The reported value (0.28) and the obtained value (0.28) differed by 0%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
 <p>East/West comparison for Spadina:</p>
 <pre class="r"><code>fit_SPAD &lt;-aov(DISTANCE ~ DIRECTION, data=SPAD)
 summary(fit_SPAD)</code></pre>
@@ -1603,6 +1626,13 @@ summary(fit_SPAD)</code></pre>
 <pre class="r"><code>etaSquared(fit_SPAD)</code></pre>
 <pre><code>##              eta.sq eta.sq.part
 ## DIRECTION 0.1962763   0.1962763</code></pre>
+<p>Check East/West comparison for Spadina (Spadina, p = .001, ηp2 = .20).</p>
+<pre class="r"><code>SPAD_p_value &lt;- 0.00113
+reportObject &lt;- reproCheck(reportedValue = '&lt;0.001', obtainedValue = SPAD_p_value, valueType = 'p', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for p. Eyeball comparison only.&quot;</code></pre>
+<pre class="r"><code>SPAD_pes_value &lt;- 0.1962763
+reportObject &lt;- reproCheck(reportedValue = '0.20', obtainedValue = SPAD_pes_value, valueType = 'pes')</code></pre>
+<pre><code>## [1] &quot;MATCH for pes. The reported value (0.2) and the obtained value (0.2) differed by 0%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
 <p>East/West comparison for Bloor-Yonge:</p>
 <pre class="r"><code>fit_BY &lt;-aov(DISTANCE ~ DIRECTION, data=BY)
 summary(fit_BY)</code></pre>
@@ -1614,6 +1644,13 @@ summary(fit_BY)</code></pre>
 <pre class="r"><code>etaSquared(fit_BY)</code></pre>
 <pre><code>##              eta.sq eta.sq.part
 ## DIRECTION 0.0774451   0.0774451</code></pre>
+<p>Check East/West comparison for Bloor-Yonge (Bloor-Yonge, p = .053, ηp2 = .08).</p>
+<pre class="r"><code>BY_p_value &lt;- 0.0528 
+reportObject &lt;- reproCheck(reportedValue = '&gt;0.05', obtainedValue = BY_p_value, valueType = 'p', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for p. Eyeball comparison only.&quot;</code></pre>
+<pre class="r"><code>BY_pes_value &lt;- 0.0774451
+reportObject &lt;- reproCheck(reportedValue = '0.08', obtainedValue = BY_pes_value, valueType = 'pes')</code></pre>
+<pre><code>## [1] &quot;MATCH for pes. The reported value (0.08) and the obtained value (0.08) differed by 0%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
 <p>East/West comparison for Sherbourne:</p>
 <pre class="r"><code>fit_SHER &lt;- aov(DISTANCE ~ DIRECTION, data=SHER)
 summary(fit_SHER)</code></pre>
@@ -1625,11 +1662,18 @@ summary(fit_SHER)</code></pre>
 <pre class="r"><code>etaSquared(fit_SHER)</code></pre>
 <pre><code>##              eta.sq eta.sq.part
 ## DIRECTION 0.2356667   0.2356667</code></pre>
+<p>Check East/West comparison for Sherbourne (Sherbourne, p &lt; .001, ηp2 = .24).</p>
+<pre class="r"><code>SHER_p_value &lt;- 0.000305
+reportObject &lt;- reproCheck(reportedValue = '&lt;0.001', obtainedValue = SHER_p_value, valueType = 'p', eyeballCheck = TRUE)</code></pre>
+<pre><code>## [1] &quot;MATCH for p. Eyeball comparison only.&quot;</code></pre>
+<pre class="r"><code>SHER_pes_value &lt;- 0.2356667
+reportObject &lt;- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_value, valueType = 'pes')</code></pre>
+<pre><code>## [1] &quot;MATCH for pes. The reported value (0.24) and the obtained value (0.24) differed by 0%. Note that the obtained value was rounded to 2 decimal places to match the reported value.&quot;</code></pre>
 </div>
 </div>
 <div id="step-5-conclusion" class="section level1">
 <h1>Step 5: Conclusion</h1>
-<p>Overall, the my results are extremely similar to the paper. The values for the descriptive statistics are slightly off but I suspect it is due a different type of ANOVA. The post-hoc comparisons are the same.</p>
+<p>This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error.</p>
 <p>[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]</p>
 <pre class="r"><code>reportObject &lt;- reportObject %&gt;%
   filter(dummyRow == FALSE) %&gt;% # remove the dummy row
@@ -1672,7 +1716,7 @@ if(reportType == &quot;copilot&quot;){
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2019-11-05                  
+##  date     2019-11-09                  
 ## 
 ## ─ Packages ──────────────────────────────────────────────────────────────
 ##  package      * version date       lib
