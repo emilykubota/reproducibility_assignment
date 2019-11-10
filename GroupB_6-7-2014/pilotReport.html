@@ -1507,19 +1507,17 @@ div.tocify {
 </div>
 
 
-<p>[TEXT IN SQUARE BRACKETS IS HERE FOR GUIDANCE. PLEASE DELETE TEXT IN SQUARE BRACKETS BEFORE KNITTING THE FINAL REPORT]</p>
 <div id="report-details" class="section level1">
 <h1>Report Details</h1>
-<p>[PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]</p>
 <pre class="r"><code>articleID &lt;- &quot;6-7-2014&quot; # insert the article ID code here e.g., &quot;10-3-2015&quot;
 reportType &lt;- 'pilot' # specify whether this is the 'pilot' report or 'copilot' report
 pilotNames &lt;- &quot;Emily Kubota&quot; # insert the pilot's name here e.g., &quot;Tom Hardwicke&quot;.
 copilotNames &lt;- &quot;Aaron Chuey&quot; # # insert the co-pilot's name here e.g., &quot;Michael Frank&quot;.
-pilotTTC &lt;- NA # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+pilotTTC &lt;- 150 # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
 copilotTTC &lt;- NA # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
 pilotStartDate &lt;- &quot;11/05/2019&quot; # insert the piloting start date in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)
-copilotStartDate &lt;- NA # insert the co-piloting start date in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)
-completionDate &lt;- NA # insert the date of final report completion in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)</code></pre>
+copilotStartDate &lt;- &quot;11/10/2019&quot; # insert the co-piloting start date in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)
+completionDate &lt;- &quot;11/10/2019&quot; # insert the date of final report completion in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)</code></pre>
 <hr />
 <div id="methods-summary" class="section level4">
 <h4>Methods summary:</h4>
@@ -1527,13 +1525,11 @@ completionDate &lt;- NA # insert the date of final report completion in US forma
 </div>
 <div id="target-outcomes" class="section level4">
 <h4>Target outcomes:</h4>
-<p>We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F &lt; 1, and a main effect of station, F(3, 194) = 24.10, p &lt; .001, ηp2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p &lt; .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p &lt; .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p &lt; .001, ηp2 = .24). Figure 1 summarizes these results. comparing</p>
-<p>[PILOT/COPILOT DO NOT CHANGE THE CODE IN THE CHUNK BELOW]</p>
+<p>We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F &lt; 1, and a main effect of station, F(3, 194) = 24.10, p &lt; .001, ηp2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p &lt; .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p &lt; .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p &lt; .001, ηp2 = .24).</p>
 </div>
 </div>
 <div id="step-1-load-packages-and-prepare-report-object" class="section level1">
 <h1>Step 1: Load packages and prepare report object</h1>
-<p>[PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]</p>
 <pre class="r"><code># load packages
 library(tidyverse) # for data munging
 library(knitr) # for kable table formating
@@ -1541,7 +1537,6 @@ library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
 library(readxl) # import excel files
 library(ReproReports) # custom reporting functions
 library(lsr) # library for eta squared</code></pre>
-<p>[PILOT/COPILOT DO NOT MAKE CHANGES TO THE CODE CHUNK BELOW]</p>
 <pre class="r"><code># Prepare report object. This will be updated automatically by the reproCheck function each time values are compared
 reportObject &lt;- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = NA, valueType = NA, percentageError = NA, comparisonOutcome = NA, eyeballCheck = NA)</code></pre>
 </div>
@@ -1674,7 +1669,6 @@ reportObject &lt;- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_v
 <div id="step-5-conclusion" class="section level1">
 <h1>Step 5: Conclusion</h1>
 <p>This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error.</p>
-<p>[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]</p>
 <pre class="r"><code>reportObject &lt;- reportObject %&gt;%
   filter(dummyRow == FALSE) %&gt;% # remove the dummy row
   select(-dummyRow) %&gt;% # remove dummy row designation
@@ -1716,7 +1710,7 @@ if(reportType == &quot;copilot&quot;){
 ##  collate  en_US.UTF-8                 
 ##  ctype    en_US.UTF-8                 
 ##  tz       America/Los_Angeles         
-##  date     2019-11-09                  
+##  date     2019-11-10                  
 ## 
 ## ─ Packages ──────────────────────────────────────────────────────────────
 ##  package      * version date       lib
