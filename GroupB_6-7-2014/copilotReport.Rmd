@@ -181,7 +181,7 @@ reportObject <- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_valu
 ```
 # Step 5: Conclusion
 
-here was one minor error, however this extremely small did not affect the force of the argument being made. Thus, the results were qualitatively reproduced.
+Emily's report was detailed and easy to read. With respect to the reproduction, there was one minor error, however this was extremely small and did not affect the force of the argument being made. Thus, the results were qualitatively reproduced.
 
 
 [PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
