@@ -1512,11 +1512,11 @@ div.tocify {
 <h1>Report Details</h1>
 <p>[PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]</p>
 <pre class="r"><code>articleID &lt;- &quot;6-7-2014&quot; # insert the article ID code here e.g., &quot;10-3-2015&quot;
-reportType &lt;- 'pilot' # specify whether this is the 'pilot' report or 'copilot' report
+reportType &lt;- 'copilot' # specify whether this is the 'pilot' report or 'copilot' report
 pilotNames &lt;- &quot;Emily Kubota&quot; # insert the pilot's name here e.g., &quot;Tom Hardwicke&quot;.
 copilotNames &lt;- &quot;Aaron Chuey&quot; # # insert the co-pilot's name here e.g., &quot;Michael Frank&quot;.
 pilotTTC &lt;- NA # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
-copilotTTC &lt;- '10' # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+copilotTTC &lt;- '30' # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
 pilotStartDate &lt;- &quot;11/05/2019&quot; # insert the piloting start date in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)
 copilotStartDate &lt;- &quot;11/10/2019&quot; # insert the co-piloting start date in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)
 completionDate &lt;- &quot;11/10/2019&quot; # insert the date of final report completion in US format e.g., as.Date(&quot;01/25/18&quot;, format = &quot;%m/%d/%y&quot;)</code></pre>
@@ -1673,7 +1673,7 @@ reportObject &lt;- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_v
 </div>
 <div id="step-5-conclusion" class="section level1">
 <h1>Step 5: Conclusion</h1>
-<p>This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error.</p>
+<p>here was one minor error, however this extremely small did not affect the force of the argument being made. Thus, the results were qualitatively reproduced.</p>
 <p>[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]</p>
 <pre class="r"><code>reportObject &lt;- reportObject %&gt;%
   filter(dummyRow == FALSE) %&gt;% # remove the dummy row
