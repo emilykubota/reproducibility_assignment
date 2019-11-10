@@ -6,19 +6,22 @@ output:
     toc_float: true
 ---
 
-[TEXT IN SQUARE BRACKETS IS HERE FOR GUIDANCE. PLEASE DELETE TEXT IN SQUARE BRACKETS BEFORE KNITTING THE FINAL REPORT]
 
 # Report Details
 
-[PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]
 
 ```{r}
 articleID <- "6-7-2014" # insert the article ID code here e.g., "10-3-2015"
 reportType <- 'pilot' # specify whether this is the 'pilot' report or 'copilot' report
 pilotNames <- "Emily Kubota" # insert the pilot's name here e.g., "Tom Hardwicke".
 copilotNames <- "Aaron Chuey" # # insert the co-pilot's name here e.g., "Michael Frank".
+<<<<<<< HEAD
 pilotTTC <- NA # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
 copilotTTC <- '10' # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+=======
+pilotTTC <- 150 # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+copilotTTC <- NA # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+>>>>>>> ee0d87e64c67c87e74a238e9c4eafe9ddc572efe
 pilotStartDate <- "11/05/2019" # insert the piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 copilotStartDate <- "11/10/2019" # insert the co-piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 completionDate <- "11/10/2019" # insert the date of final report completion in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
@@ -33,10 +36,8 @@ Subjects at the Bay Street subway station were to rate the subjective distance o
 
 #### Target outcomes: 
 
-We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station, F(3, 194) = 24.10, p < .001, ηp2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p < .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p < .001, ηp2 = .24). Figure 1 summarizes these results. comparing
+We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station, F(3, 194) = 24.10, p < .001, ηp2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p < .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p < .001, ηp2 = .24). 
 
-
-[PILOT/COPILOT DO NOT CHANGE THE CODE IN THE CHUNK BELOW]  
 
 ```{r global_options, include=FALSE}
 # sets up some formatting options for the R Markdown document
@@ -45,7 +46,6 @@ knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
 
 # Step 1: Load packages and prepare report object
 
-[PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]
 
 ```{r}
 
@@ -58,7 +58,6 @@ library(ReproReports) # custom reporting functions
 library(lsr) # library for eta squared
 ```
 
-[PILOT/COPILOT DO NOT MAKE CHANGES TO THE CODE CHUNK BELOW]
 
 ```{r}
 # Prepare report object. This will be updated automatically by the reproCheck function each time values are compared
@@ -183,8 +182,6 @@ reportObject <- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_valu
 
 This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error. 
 
-
-[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
 
 ```{r}
 reportObject <- reportObject %>%
