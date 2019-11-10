@@ -1,2 +1,6 @@
 articleID,pilotNames,copilotNames,pilotTTC,copilotTTC,pilotStartDate,copilotStartDate,completionDate,finalOutcome
+<<<<<<< HEAD
 6-7-2014,Emily Kubota,Aaron Chuey,NA,10,11/05/2019,11/10/2019,11/10/2019,Success
+=======
+6-7-2014,Emily Kubota,Aaron Chuey,150,NA,11/05/2019,11/10/2019,11/10/2019,Success
+>>>>>>> ee0d87e64c67c87e74a238e9c4eafe9ddc572efe
