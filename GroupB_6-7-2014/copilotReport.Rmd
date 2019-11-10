@@ -1,0 +1,224 @@
+---
+title: "Reproducibility Report"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+[TEXT IN SQUARE BRACKETS IS HERE FOR GUIDANCE. PLEASE DELETE TEXT IN SQUARE BRACKETS BEFORE KNITTING THE FINAL REPORT]
+
+# Report Details
+
+[PILOT/COPILOT ENTER RELEVANT REPORT DETAILS HERE]
+
+```{r}
+articleID <- "6-7-2014" # insert the article ID code here e.g., "10-3-2015"
+reportType <- 'pilot' # specify whether this is the 'pilot' report or 'copilot' report
+pilotNames <- "Emily Kubota" # insert the pilot's name here e.g., "Tom Hardwicke".
+copilotNames <- "Aaron Chuey" # # insert the co-pilot's name here e.g., "Michael Frank".
+pilotTTC <- NA # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+copilotTTC <- '10' # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+pilotStartDate <- "11/05/2019" # insert the piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+copilotStartDate <- "11/10/2019" # insert the co-piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+completionDate <- "11/10/2019" # insert the date of final report completion in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
+```
+
+------
+
+#### Methods summary: 
+
+Subjects at the Bay Street subway station were to rate the subjective distance of another subway station on a scale of 1-7 (1 = very close, 7 = very far). Subjects were recruited on the East bound platform (n = 101), and West bound platform (n = 101) and were either asked to rate a station that was just passed, or was coming up either one or two stops ago. 
+
+
+#### Target outcomes: 
+
+We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station, F(3, 194) = 24.10, p < .001, ηp2 = .27. This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. We decomposed this interaction by the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants; this effect was obtained for both the station one stop to the west (St. George, p < .001, ηp2 = .28) and the station two stops to the west (Spadina, p = .001, ηp2 = .20). The opposite pattern held true for stations to the east of Bay Street. Eastbound participants rated the stations to the east of Bay Street as closer than did westbound participants; this effect was obtained for both the station one stop to the east (Bloor-Yonge, p = .053, ηp2 = .08) and the station two stops to the east (Sherbourne, p < .001, ηp2 = .24). Figure 1 summarizes these results. comparing
+
+
+[PILOT/COPILOT DO NOT CHANGE THE CODE IN THE CHUNK BELOW]  
+
+```{r global_options, include=FALSE}
+# sets up some formatting options for the R Markdown document
+knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE)
+```
+
+# Step 1: Load packages and prepare report object
+
+[PILOT/COPILOT Some useful packages are being loaded below. You can add any additional ones you might need too.]
+
+```{r}
+
+# load packages
+library(tidyverse) # for data munging
+library(knitr) # for kable table formating
+library(haven) # import and export 'SPSS', 'Stata' and 'SAS' Files
+library(readxl) # import excel files
+library(ReproReports) # custom reporting functions
+library(lsr) # library for eta squared
+```
+
+[PILOT/COPILOT DO NOT MAKE CHANGES TO THE CODE CHUNK BELOW]
+
+```{r}
+# Prepare report object. This will be updated automatically by the reproCheck function each time values are compared
+reportObject <- data.frame(dummyRow = TRUE, reportedValue = NA, obtainedValue = NA, valueType = NA, percentageError = NA, comparisonOutcome = NA, eyeballCheck = NA)
+```
+
+# Step 2: Load data
+
+```{r}
+df <- read_excel("data/S1_Subway.xlsx")
+```
+
+# Step 3: Tidy data
+Here, I'm just separating data frames for each of the stations for the pairwise comparisons. Luckily, the data is already in a tidy format! 
+```{r}
+BY = filter(df, STN_NAME == "B-Y")
+SHER = filter(df, STN_NAME == "SHER")
+SPAD = filter(df, STN_NAME == "SPAD")
+STG = filter(df, STN_NAME == "STG")
+```
+
+# Step 4: Run analysis
+
+## Pre-processing
+
+```{r}
+```
+
+## Descriptive statistics
+We carried out a 2 (orientation: toward, away from) × 4 (station: Spadina, St. George, Bloor-Yonge, Sherbourne) analysis of variance (ANOVA) on closeness ratings, which revealed no main effect of orientation, F < 1, and a main effect of station,F(3,194)=24.10,p<.001,ηp2=.27.This main effect was qualified by the predicted interaction between orientation and station, F(3, 194) = 16.28, p < .001, ηp2 = .20. 
+```{r}
+fit <- aov(DISTANCE ~ DIRECTION*STN_NAME, data=df)
+summary(fit)
+etaSquared(fit, type = 2, anova = FALSE)
+```
+
+Now, check the values obtained above: "no main effect of orientation, F < 1"
+```{r}
+orientation_f_value <- .664
+reportObject <- reproCheck(reportedValue = '<1', obtainedValue = orientation_f_value, valueType = 'F', eyeballCheck = TRUE)
+```
+Next, check "main effect of station,F(3,194)=24.10,p<.001,ηp2=.27."
+```{r}
+station_f_value <- 23.349
+reportObject <- reproCheck(reportedValue = '24.10', obtainedValue = station_f_value, valueType = 'F')
+
+station_p_value <- 6.01e-13
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = station_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+station_pes_value <- 0.265284110
+reportObject <- reproCheck(reportedValue = '0.27', obtainedValue = station_pes_value, valueType = 'pes')
+```
+
+
+## Inferential statistics
+"We decomposed this interaction by comparing the subjective-distance ratings between participants traveling east and west for each of the four subway stations. Westbound participants rated the stations to the west of Bay Street as closer than did eastbound participants".
+
+East/West comparison for St. George's:
+```{r}
+fit_STG <- aov(DISTANCE ~ DIRECTION, data=STG)
+summary(fit_STG)
+etaSquared(fit_STG)
+```
+
+Check East/West comparison for St. George's (St. George, p < .001, ηp2 = .28). 
+```{r}
+STG_p_value <- 7.23e-05
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = STG_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+STG_pes_value <- 0.2772092
+reportObject <- reproCheck(reportedValue = '0.28', obtainedValue = STG_pes_value, valueType = 'pes')
+```
+
+East/West comparison for Spadina:
+```{r}
+fit_SPAD <-aov(DISTANCE ~ DIRECTION, data=SPAD)
+summary(fit_SPAD)
+etaSquared(fit_SPAD)
+```
+
+Check East/West comparison for Spadina (Spadina, p = .001, ηp2 = .20). 
+```{r}
+SPAD_p_value <- 0.00113
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = SPAD_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+SPAD_pes_value <- 0.1962763
+reportObject <- reproCheck(reportedValue = '0.20', obtainedValue = SPAD_pes_value, valueType = 'pes')
+```
+
+East/West comparison for Bloor-Yonge:
+```{r}
+fit_BY <-aov(DISTANCE ~ DIRECTION, data=BY)
+summary(fit_BY)
+etaSquared(fit_BY)
+```
+
+Check East/West comparison for Bloor-Yonge (Bloor-Yonge, p = .053, ηp2 = .08). 
+```{r}
+BY_p_value <- 0.0528 
+reportObject <- reproCheck(reportedValue = '>0.05', obtainedValue = BY_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+BY_pes_value <- 0.0774451
+reportObject <- reproCheck(reportedValue = '0.08', obtainedValue = BY_pes_value, valueType = 'pes')
+```
+
+East/West comparison for Sherbourne:
+```{r}
+fit_SHER <- aov(DISTANCE ~ DIRECTION, data=SHER)
+summary(fit_SHER)
+etaSquared(fit_SHER)
+```
+
+Check East/West comparison for Sherbourne  (Sherbourne, p < .001, ηp2 = .24). 
+```{r}
+SHER_p_value <- 0.000305
+reportObject <- reproCheck(reportedValue = '<0.001', obtainedValue = SHER_p_value, valueType = 'p', eyeballCheck = TRUE)
+
+SHER_pes_value <- 0.2356667
+reportObject <- reproCheck(reportedValue = '0.24', obtainedValue = SHER_pes_value, valueType = 'pes')
+```
+# Step 5: Conclusion
+
+This reproduction is a success. I reproduced the results of the paper, with the exception of one minor error. 
+
+
+[PILOT/COPILOT DOD NOT EDIT THE CODE CHUNK BELOW]
+
+```{r}
+reportObject <- reportObject %>%
+  filter(dummyRow == FALSE) %>% # remove the dummy row
+  select(-dummyRow) %>% # remove dummy row designation
+  mutate(articleID = articleID) %>% # add variables to report 
+  select(articleID, everything()) # make articleID first column
+
+# decide on final outcome
+if(any(reportObject$comparisonOutcome %in% c("MAJOR_ERROR", "DECISION_ERROR"))){
+  finalOutcome <- "Failure"
+}else{
+  finalOutcome <- "Success"
+}
+
+# collate report extra details
+reportExtras <- data.frame(articleID, pilotNames, copilotNames, pilotTTC, copilotTTC, pilotStartDate, copilotStartDate, completionDate, finalOutcome)
+
+# save report objects
+if(reportType == "pilot"){
+  write_csv(reportObject, "pilotReportDetailed.csv")
+  write_csv(reportExtras, "pilotReportExtras.csv")
+}
+
+if(reportType == "copilot"){
+  write_csv(reportObject, "copilotReportDetailed.csv")
+  write_csv(reportExtras, "copilotReportExtras.csv")
+}
+```
+
+# Session information
+
+[This function will output information about the package versions used in this report:]
+
+```{r session_info, include=TRUE, echo=TRUE, results='markup'}
+devtools::session_info()
+```
