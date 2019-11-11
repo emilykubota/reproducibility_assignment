@@ -15,13 +15,8 @@ articleID <- "6-7-2014" # insert the article ID code here e.g., "10-3-2015"
 reportType <- 'pilot' # specify whether this is the 'pilot' report or 'copilot' report
 pilotNames <- "Emily Kubota" # insert the pilot's name here e.g., "Tom Hardwicke".
 copilotNames <- "Aaron Chuey" # # insert the co-pilot's name here e.g., "Michael Frank".
-<<<<<<< HEAD
-pilotTTC <- NA # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
+pilotTTC <- '150' # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
 copilotTTC <- '10' # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
-=======
-pilotTTC <- 150 # insert the pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
-copilotTTC <- NA # insert the co-pilot's estimated time to complete (in minutes, it is fine to approximate) e.g., 120
->>>>>>> ee0d87e64c67c87e74a238e9c4eafe9ddc572efe
 pilotStartDate <- "11/05/2019" # insert the piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 copilotStartDate <- "11/10/2019" # insert the co-piloting start date in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
 completionDate <- "11/10/2019" # insert the date of final report completion in US format e.g., as.Date("01/25/18", format = "%m/%d/%y")
